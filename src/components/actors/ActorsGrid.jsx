@@ -12,7 +12,9 @@ const ActorsGrid = ({ actors }) => {
           deathday={data.person.deathday}
           gender={data.person.gender}
           image={
-            data.person.image ? data.show.image.medium : '/not-found-image.png'
+            data.person.image
+              ? data.person.image.medium
+              : '/not-found-image.png'
           }
         />
       ))}

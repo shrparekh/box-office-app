@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 const ActorCard = ({ name, image, gender, country, birthday, deathday }) => {
   return (
     <div>
@@ -7,15 +5,12 @@ const ActorCard = ({ name, image, gender, country, birthday, deathday }) => {
         <img src={image} alt={name} />
       </div>
       <h1>
-        {name} {Boolean(gender) && `(${gender})`}
+        {name} {!!gender && `(${gender})`}
       </h1>
       <p>{country ? `Comes from ${country}` : 'No country known'}</p>
-      {Boolean(birthday) && <p>Born {birthday}</p>}
+      {!!birthday && <p>Born {birthday}</p>}
       <p>{deathday ? `Died ${deathday}` : 'Alive'}</p>
-      <div>
-        <Link to="/">Read more </Link>
-        <button type="button">star me </button>
-      </div>
+      <div></div>
     </div>
   );
 };
