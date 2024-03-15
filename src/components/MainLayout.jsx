@@ -8,6 +8,7 @@ const MainLayout = () => {
       <Navs />
 
       <Outlet />
+      {/* components is a replacemenet  for children componnets*/}
     </div>
   );
 };

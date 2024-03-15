@@ -19,3 +19,5 @@ const ShowCard = ({ name, image, id, summary }) => {
   );
 };
 export default ShowCard;
+// tjis is the regular way to display data formthe api
+// showcard showgrid actorcard actorgrid

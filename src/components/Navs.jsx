@@ -8,7 +8,9 @@ const LINKS = [
     text: 'Starred',
     to: '/Starred',
   },
+  /* this is navitagatio ued by link componnets*/
 ];
+
 const Navs = () => {
   return (
     <div>
