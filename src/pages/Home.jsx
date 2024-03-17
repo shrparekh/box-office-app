@@ -1,31 +1,47 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { searchForShows, searchForPeople } from '../api/tvmaze';
 import SearchForm from '../components/SearchForm';
 import ShowGrid from '../components/shows/ShowGrid';
 import ActorsGrid from '../components/actors/ActorsGrid';
 const Home = () => {
-  const [apiData, setApiData] = useState(null);
-  const [apiDataError, setApiDataError] = useState(null);
+  const [filter, setFilter] = useState(null);
+
+  const { data: apiData, error: apiDataError } = useQuery({
+    queryKey: ['search', filter],
+    // ⬇️ disabled as long as the filter is undefined or empty            (THIS CODE IS ALSO SAME AS THE CODE THAT IS COMMENTED BELOW .)
+    queryFn: () =>
+      filter.searchOption === 'shows'
+        ? searchForShows(filter.q)
+        : searchForPeople(filter.q),
+    enabled: !!filter, //it is a condition when we aplly the filter only then it will fetch the logic .(meaning of enabled)
+    refetchOnWindowFocus: false, // it wont refetch the data agian and again .
+  });
 
   const onSearch = async ({ q, searchOption }) => {
-    try {
-      setApiDataError(null);
-      {
-        /* this is used for after the error hs oocured you can start typing agian */
-      }
-
-      if (searchOption === 'shows') {
-        const result = await searchForShows(q); // this code is for  when the radio button is on shows it will result for show and if it is on actors it will show foractors
-
-        setApiData(result);
-      } else {
-        const result = await searchForPeople(q);
-        setApiData(result);
-      }
-    } catch (error) {
-      setApiDataError(error); //aslo for error code ans try catch i ofr the error
-    }
+    setFilter({ q, searchOption });
   };
+  // (YOU ALSO CAN WRITE THIS BOTTM CODE INSTEAD OF THE UPPER CODE . THE UPPER CODE IS SHORT TO WRITE .)
+  // const [apiData, setApiData] = useState(null);
+  //const [apiDataError, setApiDataError] = useState(null);
+
+  //  { try {
+  //   setApiDataError(null);
+  // {
+  // /* this is used for after the error hs oocured you can start typing agian */
+  // }
+
+  //if (searchOption === 'shows') {
+  //const result = await searchForShows(q); // this code is for  when the radio button is on shows it will result for show and if it is on actors it will show foractors
+
+  //setApiData(result);
+  //} else {
+  //const result = await searchForPeople(q);
+  //setApiData(result);
+  //}
+  //} catch (error) {
+  //setApiDataError(error); //aslo for error code ans try catch i ofr the error
+  // }
 
   const renderApiData = () => {
     if (apiDataError) {
