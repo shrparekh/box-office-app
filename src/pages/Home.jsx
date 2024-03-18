@@ -15,7 +15,7 @@ const Home = () => {
         ? searchForShows(filter.q)
         : searchForPeople(filter.q),
     enabled: !!filter, //it is a condition when we aplly the filter only then it will fetch the logic .(meaning of enabled)
-    refetchOnWindowFocus: false, // it wont refetch the data agian and again .
+    //refetchOnWindowFocus: false, // it wont refetch the data agian and again .
   });
 
   const onSearch = async ({ q, searchOption }) => {

@@ -2,9 +2,12 @@ import { useParams } from 'react-router-dom'; // use params are the hooks that a
 
 import { useQuery } from '@tanstack/react-query';
 import { getShowById } from '../api/tvmaze';
+import ShowMainData from '../components/shows/ShowMainData';
+import Details from '../components/shows/Details';
+import Seasons from '../components/shows/Seasons';
+import Cast from '../components/shows/Cast';
 
-{
-  /*const useShowById = ShowId => {
+/*const useShowById = ShowId => {
   const [showData, setShowData] = useState(null);
   const [showError, setShowError] = useState(null);
 
@@ -21,21 +24,50 @@ import { getShowById } from '../api/tvmaze';
   }, [ShowId]);
   return { showData, showError };
 };*/
-}
+
 const Show = () => {
   const { ShowId } = useParams();
   //const { showData, showError } = useShowById(ShowId);
-  const { data: showError, error: showData } = useQuery({
+  const { data: showData, error: showError } = useQuery({
     // new code for fetch data using library of fetching data this iscode for fethicng data you can usethis.
     queryKey: ['show', ShowId],
-    queryfn: () => getShowById(ShowId),
+    queryFn: () => getShowById(ShowId),
   });
 
   if (showError) {
     return <div>We have an error: {showError.message} </div>; // this code is for the showing of the data and if the data is not there then show erroe
   }
   if (showData) {
-    return <div>Got show data: {showData.name}</div>;
+    return (
+      <div>
+        <ShowMainData
+          image={showData.image}
+          name={showData.name}
+          rating={showData.rating}
+          summary={showData.summary}
+          genres={showData.genres}
+        />
+        <div>
+          <h2>Details</h2>
+          <Details
+            status={showData.status}
+            premiered={showData.premiered}
+            network={showData.network}
+          />
+        </div>
+        <div>
+          <h2>Seasons</h2>
+          <Seasons seasons={showData._embedded.seasons} />
+        </div>
+
+        <div>
+          <div>
+            <h2>Cast</h2>
+            <Cast cast={showData._embedded.cast} />
+          </div>
+        </div>
+      </div>
+    );
   }
   return <div>Data is loading</div>;
 };
