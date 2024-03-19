@@ -1,7 +1,8 @@
-import { useReducer, useEffect } from 'react';
 import ShowCard from './ShowCard';
+import { useStarredShows } from '../../lib/useStarredShows';
 
-const usePersistedReducer = (reducer, initialState, localStorageKey) => {
+{
+  /*const usePersistedReducer = (reducer, initialState, localStorageKey) => {
   const [state, dispatch] = useReducer(reducer, initialState, initial => {
     const persistedValue = localStorage.getItem(localStorageKey);
     return persistedValue ? JSON.parse(persistedValue) : initial;
@@ -10,9 +11,12 @@ const usePersistedReducer = (reducer, initialState, localStorageKey) => {
     localStorage.setItem(localStorageKey, JSON.stringify(state));
   }, [state, localStorageKey]);
   return [state, dispatch];
-};
+  //upper code means the starred value stored in local storage  when we refresh the page the vlaue is still there?
+};*/
+}
 
-const starredShowReducer = (currentStarred, action) => {
+{
+  /*const starredShowReducer = (currentStarred, action) => {
   switch (action.type) {
     case 'STAR':
       return currentStarred.concat(action.ShowId);
@@ -22,23 +26,27 @@ const starredShowReducer = (currentStarred, action) => {
       return currentStarred;
     //this logic is responsible of adding and removing the show id form the list of starred show depending on the dispatched of action  this code is advance
   }
-};
+};*/
+}
 
 const ShowGrid = ({ shows }) => {
-  const [starredShows, dispatchedStarred] = usePersistedReducer(
+  const [starredShows, dispatchStarred] = useStarredShows();
+  {
+    /*const [starredShows, dispatchedStarred] = usePersistedReducer(
     starredShowReducer,
     [],
     'starredShows'
   );
-  // here the code is the when you clikc on star me button it will handle the logic .
+  // here the code is the when you clikc on star me button it will handle the logic .*/
+  }
 
   const onStarMeClick = ShowId => {
     //this code means the star button is the showid function .
     const isStarred = starredShows.includes(ShowId);
     if (isStarred) {
-      dispatchedStarred({ type: 'UNSTAR', ShowId });
+      dispatchStarred({ type: 'UNSTAR', ShowId });
     } else {
-      dispatchedStarred({ type: 'STAR', ShowId });
+      dispatchStarred({ type: 'STAR', ShowId });
     }
   };
   //meaning ofthis this code is if the code is starred it will unstar it and if its is unstarred it star it . and give them theshow id .
@@ -54,6 +62,7 @@ const ShowGrid = ({ shows }) => {
           }
           summary={data.show.summary}
           onStarMeClick={onStarMeClick}
+          isStarred={starredShows.includes(data.show.id)}
         />
       ))}
     </div>
