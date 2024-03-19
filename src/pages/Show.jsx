@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom'; // use params are the hooks that are used for the dynamic params from the curretn url that were matched by the route path
-
+import { Link, useParams } from 'react-router-dom'; // use params are the hooks that are used for the dynamic params from the curretn url that were matched by the route path
+//if you want to use navigate button then you have to put usenavigation in reactrouterdom
 import { useQuery } from '@tanstack/react-query';
 import { getShowById } from '../api/tvmaze';
 import ShowMainData from '../components/shows/ShowMainData';
@@ -33,6 +33,10 @@ const Show = () => {
     queryKey: ['show', ShowId],
     queryFn: () => getShowById(ShowId),
   });
+  /* const navigateTo = useNavigate();
+  const onGoBack = () => {
+    navigateTo('/');
+  };      this isthe part of the code for button navigation form show page to home page */
 
   if (showError) {
     return <div>We have an error: {showError.message} </div>; // this code is for the showing of the data and if the data is not there then show erroe
@@ -40,6 +44,11 @@ const Show = () => {
   if (showData) {
     return (
       <div>
+        <Link to="/">GO BACK TO HOME</Link>
+        {/* THIS IS USED TO LINK BACK TO HOME PAGE FROM THE SHOW PAGE */}
+        {/*  <button type="button" onClick={onGoBack}>
+          go back to home{' '}
+        </button>               this is to part of button navigation*/}
         <ShowMainData
           image={showData.image}
           name={showData.name}
@@ -59,7 +68,6 @@ const Show = () => {
           <h2>Seasons</h2>
           <Seasons seasons={showData._embedded.seasons} />
         </div>
-
         <div>
           <div>
             <h2>Cast</h2>
