@@ -1,4 +1,4 @@
-const ShowCard = ({ name, image, id, summary }) => {
+const ShowCard = ({ name, image, id, summary, onStarMeClick }) => {
   const summaryStripped = summary
     ? summary.split(' ').slice(0, 10).join(' ').replace(/<.+?>/g, '')
     : 'no description';
@@ -15,7 +15,9 @@ const ShowCard = ({ name, image, id, summary }) => {
           {/* to show the show page on new tab */}
           Read more{' '}
         </a>
-        <button type="button">Star me </button>
+        <button type="button" onClick={() => onStarMeClick(id)}>
+          Star me{' '}
+        </button>
       </div>
     </div>
   );
