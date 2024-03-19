@@ -42,7 +42,7 @@ const ShowGrid = ({ shows }) => {
 
   const onStarMeClick = ShowId => {
     //this code means the star button is the showid function .
-    const isStarred = starredShows.includes(ShowId);
+    const isStarred = starredShows.includes(ShowId); // This information can be used in your application logic to determine whether a particular show is starred or not.
     if (isStarred) {
       dispatchStarred({ type: 'UNSTAR', ShowId });
     } else {

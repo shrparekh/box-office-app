@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from 'react';
 
 const usePersistedReducer = (reducer, initialState, localStorageKey) => {
+  //meaning of usepersistedrducer means :It's often used in React applications where you want to preserve certain parts of the application's state even if the page is refreshed or the user navigates away from the page and returns later.
   const [state, dispatch] = useReducer(reducer, initialState, initial => {
     const persistedValue = localStorage.getItem(localStorageKey);
     return persistedValue ? JSON.parse(persistedValue) : initial;
@@ -20,7 +21,7 @@ const starredShowReducer = (currentStarred, action) => {
       return currentStarred.filter(ShowId => ShowId !== action.ShowId);
     default:
       return currentStarred;
-    //this logic is responsible of adding and removing the show id form the list of starred show depending on the dispatched of action  this code is advance
+    // summary, this reducer handles actions related to starring and unstarring shows. When a 'STAR' action is dispatched, it adds the show ID to the list of starred shows. When an 'UNSTAR' action is dispatched, it removes the show ID from the list of starred shows. If the action type is unknown, it returns the current state without any changes)
   }
 };
 export const useStarredShows = () => {
