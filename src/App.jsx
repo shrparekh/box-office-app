@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // this is a code that is only to donwload the fetch the data .
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
 import Show from './pages/Show';
@@ -13,7 +13,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalTheme>
         {/* same as above */}
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
@@ -40,7 +40,7 @@ function App() {
         </Route>
         <Route path="contact-us" element={<Contact />} />*/}
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </GlobalTheme>
     </QueryClientProvider>
   );
