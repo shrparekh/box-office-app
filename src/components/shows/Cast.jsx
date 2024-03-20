@@ -1,3 +1,4 @@
+import NotFoundImageSrc from '../../lib/not-found-image.png';
 import styled from 'styled-components';
 const Cast = ({ cast }) => {
   return (
@@ -6,7 +7,7 @@ const Cast = ({ cast }) => {
         <div key={person.id} className="cast-item">
           <div className="pic-wrapper">
             <img
-              src={person.image ? person.image.medium : '/not-found-image.png'}
+              src={person.image ? person.image.medium : NotFoundImageSrc}
               alt={person.name}
             />
           </div>

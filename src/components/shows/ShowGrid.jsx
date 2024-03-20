@@ -1,7 +1,7 @@
 import ShowCard from './ShowCard';
 import { useStarredShows } from '../../lib/useStarredShows';
 import { FlexGrid } from '../common/FlexGrid';
-
+import NotFoundImageSrc from '../../lib/not-found-image.png';
 {
   /*const usePersistedReducer = (reducer, initialState, localStorageKey) => {
   const [state, dispatch] = useReducer(reducer, initialState, initial => {
@@ -59,7 +59,7 @@ const ShowGrid = ({ shows }) => {
           id={data.show.id} // this whole code is for the apidata that has been collected form the tv maze api this is how you import data form it by this code .
           name={data.show.name}
           image={
-            data.show.image ? data.show.image.medium : '/not-found-image.png' //if there is a image ? (meaning is it i truthy ) then show image :(meaning otherwise ) show image not found
+            data.show.image ? data.show.image.medium : NotFoundImageSrc //if there is a image ? (meaning is it i truthy ) then show image :(meaning otherwise ) show image not found
           }
           summary={data.show.summary}
           onStarMeClick={onStarMeClick}
