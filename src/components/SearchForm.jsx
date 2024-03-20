@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchStr } from '../lib/useSearchStr';
+import CustomRadio from './CustomRadio';
 
 const SearchForm = ({ onSearch }) => {
   const [searchStr, setSearchStr] = useSearchStr();
@@ -28,9 +29,26 @@ const SearchForm = ({ onSearch }) => {
   return (
     <form onSubmit={onSubmit}>
       <input type="text" value={searchStr} onChange={onSearchInputChange} />
-      <label>
-        {' '}
-        {/* if  there is an inp ut  then there will be onchange event */}
+
+      <CustomRadio
+        label="shows"
+        name="search-option"
+        value="shows"
+        checked={searchOption === 'shows'}
+        onChange={onRadioChange}
+      />
+
+      <CustomRadio
+        label="Actors"
+        name="search-option"
+        value="shows"
+        checked={searchOption === 'shows'}
+        onChange={onRadioChange}
+      />
+
+      {/* <label> 
+        
+        {/* if  there is an inp ut  then there will be onchange event 
         Shows
         <input
           type="radio"
@@ -39,9 +57,10 @@ const SearchForm = ({ onSearch }) => {
           checked={searchOption === 'shows'}
           onChange={onRadioChange}
         />
-        {/* this is for the small box to write text and the radio button */}
-      </label>
-      <label>
+        {/* this is for the small box to write text and the radio button 
+      </label> */}
+
+      {/* <label>
         Actors
         <input
           type="radio"
@@ -50,7 +69,7 @@ const SearchForm = ({ onSearch }) => {
           checked={searchOption === 'actors'} //checked is used when the radio button is on shows and it shows the shows output
           onChange={onRadioChange}
         />
-      </label>
+      </label>*/}
       <button type="submit">Search</button>
     </form>
   );
