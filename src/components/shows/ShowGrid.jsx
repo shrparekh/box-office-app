@@ -1,5 +1,6 @@
 import ShowCard from './ShowCard';
 import { useStarredShows } from '../../lib/useStarredShows';
+import { FlexGrid } from '../common/FlexGrid';
 
 {
   /*const usePersistedReducer = (reducer, initialState, localStorageKey) => {
@@ -51,7 +52,7 @@ const ShowGrid = ({ shows }) => {
   };
   //meaning ofthis this code is if the code is starred it will unstar it and if its is unstarred it star it . and give them theshow id .
   return (
-    <div>
+    <FlexGrid>
       {shows.map(data => (
         <ShowCard
           key={data.show.id}
@@ -65,7 +66,7 @@ const ShowGrid = ({ shows }) => {
           isStarred={starredShows.includes(data.show.id)}
         />
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 export default ShowGrid;
